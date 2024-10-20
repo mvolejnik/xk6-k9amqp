@@ -1,14 +1,10 @@
-package main
+package k9amqp
 
 import (
-	"fmt"
-
 	"github.com/mvolejnik/xk6-k9-amqp/amqp"
+	"go.k6.io/k6/js/modules"
 )
 
-var k9amqp = new(amqp.K9Amqp)
-
-func main() {
-	fmt.Println("Hello, World!")
-	k9amqp.Test()
+func init() {
+	modules.Register("k6/x/k9amqp", new(amqp.K9Amqp))
 }
