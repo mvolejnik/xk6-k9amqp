@@ -1,17 +1,20 @@
 package k9amqp
 
 import (
+	"fmt"
 	"go.k6.io/k6/js/modules"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 type AmqpConnection struct {
-	Url string
+	Server string
+	Port int
 	Username string
 	Password string
 }
 
 type K9amqp struct {
-	Pool map[AmqpConnection]string
+	Pool map[AmqpConnection]*amqp.Connection
 }
 
 func init() {
@@ -19,16 +22,37 @@ func init() {
 }
 
 func (k9amqp *K9amqp)  InitPool() {
-	k9amqp.Pool = make(map[AmqpConnection]string)
+	k9amqp.Pool = make(map[AmqpConnection]*amqp.Connection)
 }
 
-func (k9amqp *K9amqp) Connect(url string, username string, password string) string {
-	println("K9amqp connect")
-	k9amqp.Pool[AmqpConnection{Url: url, Username: username, Password: password}] = "test"
+func (k9amqp *K9amqp) Connect(server string, port int, vhost string, username string, password string) string {
+	/*config := amqp.Config{
+		Vhost:      vhost,
+		Properties: amqp.NewConnectionProperties(),
+	}*/
+	conn, err := amqp.Dial(fmt.Sprintf("amqp://%s:%s@%s:%d", username, password, server, port))
+	println(err)
+	k9amqp.Pool[AmqpConnection{Server: server, Port: port, Username: username, Password: password}] = conn
+	channel, err := conn.Channel()
+	println(err)
+	println(channel)
+	/*err = channel.Publish(
+		"amq.topic",
+		"test",
+		false,
+		false,
+		amqp.Publishing{
+			Headers:         amqp.Table{},
+			ContentType:     "application/json",
+			ContentEncoding: "",
+			Body:            []byte("{}"),
+			DeliveryMode:    amqp.Transient,
+			Priority: 0,
+		},
+	)*/
 	return "test"
 }
 
 func (k9amqp *K9amqp) Test() string {
-	println("K9 AMQP test()")
 	return "test"
 }

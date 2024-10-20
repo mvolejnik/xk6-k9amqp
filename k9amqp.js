@@ -10,7 +10,7 @@ export const options = {
 export function setup() {
   console.log("setup");
   k9amqp.initPool();
-  k9amqp.connect("amqp://localhost:5671", "guest", "guest");
+  k9amqp.connect("localhost", 5671, "/", "guest", "guest");
 }
 
 export default function() {

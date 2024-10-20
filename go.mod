@@ -2,7 +2,10 @@ module github.com/mvolejnik/xk6-k9amqp
 
 go 1.23.2
 
-require go.k6.io/k6 v0.54.0
+require (
+	github.com/rabbitmq/amqp091-go v1.10.0
+	go.k6.io/k6 v0.54.0
+)
 
 require (
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
