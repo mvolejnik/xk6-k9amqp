@@ -7,6 +7,12 @@ export const options = {
   duration: '30s',
 }
 
+export function setup() {
+  console.log("setup");
+  k9amqp.initPool();
+  k9amqp.connect("amqp://localhost:5671", "guest", "guest");
+}
+
 export default function() {
   console.log(k9amqp.test());
   sleep(1);
