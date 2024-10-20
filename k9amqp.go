@@ -12,5 +12,6 @@ type K9amqp struct{}
 
 func (k9amqp *K9amqp) Test() string {
 	println("K9 AMQP")
+	println(k9amqp)
 	return "test"
 }
