@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
-import { k9amqp } from 'k6/x/k9amqp';
+import k9amqp from 'k6/x/k9amqp';
 
 export const options = {
   vus: 10,
@@ -8,7 +8,6 @@ export const options = {
 }
 
 export default function() {
-  console.log(k9amqp);
-  //console.log(k9amqp.test());
+  console.log(k9amqp.test());
   sleep(1);
 }

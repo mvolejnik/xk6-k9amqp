@@ -5,7 +5,6 @@ import (
 )
 
 func init() {
-	println("### init()")
 	modules.Register("k6/x/k9amqp", new(K9amqp))
 }
 

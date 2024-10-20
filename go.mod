@@ -1,4 +1,4 @@
-module github.com/mvolejnik/xk6-k9amqp
+module xk6-k9amqp
 
 go 1.23.2
 
